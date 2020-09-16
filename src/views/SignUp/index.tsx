@@ -1,7 +1,6 @@
 import React from "react";
 import {} from "react-router-dom";
 import {
-  makeStyles,
   CssBaseline,
   Container,
   Avatar,
@@ -15,32 +14,12 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
+import { useStyles } from "./styled";
+
 import { useFormFields } from "../../_libs/hooksLib";
 import AuthService from "../../_services/auth.service";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-interface SignUpProps {}
-
-export const SignUp: React.FC<SignUpProps> = ({}) => {
+export const SignUp: React.FC = () => {
   const classes = useStyles();
 
   const [fields, handleFieldChange] = useFormFields({
@@ -70,7 +49,7 @@ export const SignUp: React.FC<SignUpProps> = ({}) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container maxWidth="xs" component="main">
         <div className={classes.paper}>
@@ -196,7 +175,7 @@ export const SignUp: React.FC<SignUpProps> = ({}) => {
           </form>
         </div>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

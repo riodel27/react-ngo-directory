@@ -1,40 +1,10 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Link,
-  makeStyles,
-  Button,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Link, Button } from "@material-ui/core";
 
 import Logo from "../../_assets/images/Logo.svg";
+import { useStyles } from "./styled";
 
-interface HeaderProps {}
-
-const useStyles = makeStyles((theme) => ({
-  "@global": {
-    ul: {
-      margin: 0,
-      padding: 0,
-      listStyle: "none",
-    },
-  },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: "wrap",
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
-}));
-
-export const Header: React.FC<HeaderProps> = ({}) => {
+export const Header: React.FC = ({}) => {
   const classes = useStyles();
   return (
     <AppBar

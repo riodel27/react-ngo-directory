@@ -1,19 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
-import Login from "./views/Login";
+import SignIn from "./views/Login";
 import SignUp from "./views/SignUp";
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Header />
-      {/* <Login /> */}
-      <SignUp />
-      <Footer />
-    </div>
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/sign-up" component={SignUp} />
+        <Route />
+      </Switch>
+    </Router>
   );
 }
 
