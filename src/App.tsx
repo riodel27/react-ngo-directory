@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Header from "./components/Header";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PublicRoute from "./components/PublicRoute";
-import Dashboard from "./views/Dashboard";
-import SignIn from "./views/Login";
-import SignUp from "./views/SignUp";
-import PageNotFound from "./views/PageNotFound";
+import Header from "components/Header";
+import ProtectedRoute from "components/ProtectedRoute";
+import PublicRoute from "components/PublicRoute";
+import Dashboard from "views/Dashboard";
+import SignIn from "views/Login";
+import SignUp from "views/SignUp";
+import PageNotFound from "views/PageNotFound";
 
 function App() {
   return (

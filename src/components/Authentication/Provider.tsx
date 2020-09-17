@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 
 import { User } from "@/global/types";
 import { AuthContext } from "./Context";
-import { useLocalStorage } from "../../_libs/hooksLib";
+import { useLocalStorage } from "_libs/hooksLib";
 
 export type AuthProviderProps = {
   defaultAuthenticated?: boolean;

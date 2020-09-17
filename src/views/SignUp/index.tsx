@@ -15,8 +15,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { useStyles } from "./styled";
 
-import { useFormFields } from "../../_libs/hooksLib";
-import AuthService from "../../_services/auth.service";
+import { useFormFields } from "_libs/hooksLib";
+import AuthService from "_services/auth.service";
 
 export const SignUp: React.FC = () => {
   const classes = useStyles();

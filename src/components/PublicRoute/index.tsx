@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Redirect } from "react-router-dom";
 
-import { AuthContext } from "../Authentication";
+import { AuthContext } from "components/Authentication";
 
 const PublicRoutes: React.FC<{}> = () => {
   const { authenticated } = React.useContext(AuthContext);

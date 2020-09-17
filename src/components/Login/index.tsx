@@ -16,9 +16,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { useStyles } from "./styled";
 
-import { useFormFields, useLocalStorage } from "../../_libs/hooksLib";
-import AuthService from "../../_services/auth.service";
-import { AuthContext } from "../Authentication";
+import { useFormFields, useLocalStorage } from "_libs/hooksLib";
+import AuthService from "_services/auth.service";
+import { AuthContext } from "components/Authentication";
 
 export const Login: React.FC<any> = ({ history }) => {
   const classes = useStyles();

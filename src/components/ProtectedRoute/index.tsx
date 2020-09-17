@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Router from "react-router-dom";
 
 /* Local */
-import { AuthContext } from "../Authentication";
+import { AuthContext } from "components/Authentication";
 
 // ----------------------------------------------------------------------------
 

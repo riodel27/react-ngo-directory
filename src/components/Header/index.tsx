@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography, Link, Button } from "@material-ui/core";
 
-import Logo from "../../_assets/images/Logo.svg";
+import Logo from "_assets/images/Logo.svg";
 
 import { useStyles } from "./styled";
 
+import { AuthContext } from "components/Authentication";
+
 export const Header: React.FC = ({}) => {
   const classes = useStyles();
+
+  const { authenticated } = useContext(AuthContext);
+
   return (
     <AppBar
       position="static"
@@ -47,7 +52,7 @@ export const Header: React.FC = ({}) => {
           variant="outlined"
           className={classes.link}
         >
-          Login
+          {authenticated ? "Logout" : "Login"}
         </Button>
         <nav>
           <Link

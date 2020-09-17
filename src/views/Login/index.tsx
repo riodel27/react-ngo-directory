@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import * as Router from "react-router-dom";
 
-import { AuthContext } from "../../components/Authentication";
+import { AuthContext } from "components/Authentication";
 
-import LoginModule from "../../components/Login";
+import LoginModule from "components/Login";
 
 export const Login: React.FC = () => {
   const { authenticated } = useContext(AuthContext);
