@@ -19,8 +19,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   const [token, setToken] = useLocalStorage("user-token", "");
 
   useEffect(() => {
+    // TODO: fix logic here for storing token
+
+    // TODO:fix authenticated and user state will be reset on browser reload or refresh
+
     if (user && authenticated) {
       setToken(user.token || "");
+    }
+
+    if (token) {
+      setAuthenticated(true);
     }
   }, [user, authenticated, setToken]);
 
@@ -34,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
       user,
       token,
     }),
-    [authenticated, user, token]
+    [authenticated, user, token, setAuthenticated, setUser]
   );
 
   return (
