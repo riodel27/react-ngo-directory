@@ -16,21 +16,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 }) => {
   const [authenticated, setAuthenticated] = useState(defaultAuthenticated);
   const [user, setUser] = useState(defaultUser);
-  const [token, setToken] = useLocalStorage("user-token", "");
+
+  const [token, _] = useLocalStorage("globedrop", "");
+  const [user_id, __] = useLocalStorage("user_id", "");
 
   useEffect(() => {
-    // TODO: fix logic here for storing token
-
-    // TODO:fix authenticated and user state will be reset on browser reload or refresh
-
-    if (user && authenticated) {
-      setToken(user.token || "");
-    }
-
     if (token) {
       setAuthenticated(true);
     }
-  }, [user, authenticated, setToken]);
+  }, [token, user_id]);
+
+  // todo: api call for getting user data
 
   // const previousAuthenticated = usePrevious(authenticated);
 
