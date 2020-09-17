@@ -2,6 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Link, Button } from "@material-ui/core";
 
 import Logo from "../../_assets/images/Logo.svg";
+
 import { useStyles } from "./styled";
 
 export const Header: React.FC = ({}) => {

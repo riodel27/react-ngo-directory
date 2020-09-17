@@ -1,6 +1,6 @@
 import { axiosInstance } from "./base";
 
-import { User } from "../types";
+import { User } from "@/global/types";
 
 export function signIn(email: string, password: string) {
   return axiosInstance.post("/user/login", { email, password });

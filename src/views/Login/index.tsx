@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import {
   CssBaseline,
@@ -17,12 +17,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useStyles } from "./styled";
 
 import { useFormFields } from "../../_libs/hooksLib";
+import { AuthContext } from "../../components/Authentication";
 import AuthService from "../../_services/auth.service";
 
 export const Login: React.FC = () => {
   const classes = useStyles();
-  let history = useHistory();
-
+  const history = useHistory();
+  const { setUser, setAuthenticated } = useContext(AuthContext);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
@@ -34,10 +35,16 @@ export const Login: React.FC = () => {
     if (event.currentTarget.checkValidity() === false) event.stopPropagation();
     else {
       try {
-        await AuthService.signIn(fields.email, fields.password);
-        // userHasAuthenticated(true);
+        const response = await AuthService.signIn(
+          fields.email,
+          fields.password
+        );
+
+        setAuthenticated(true);
+        setUser({ ...response.data.user, token: response.data.access_token });
         history.push("/");
       } catch (e) {
+        console.log("error auth sign: ", e);
         // onError(e);
         // setIsLoading(false);
       }
@@ -45,7 +52,7 @@ export const Login: React.FC = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container maxWidth="xs" component="main">
         <div className={classes.paper}>
@@ -105,7 +112,7 @@ export const Login: React.FC = () => {
           </form>
         </div>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 
