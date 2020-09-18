@@ -1,4 +1,5 @@
 export type User = {
+  _id?: string;
   email?: string;
   password?: string;
   username?: string;
@@ -7,7 +8,12 @@ export type User = {
   country?: string;
   ngoAdmin?: boolean;
   userType?: string;
-  token?: string;
+  method?: string;
+  createdAt?: string;
+  updated?: string;
+  exp?: number;
+  iat?: number;
+  organizations?: [];
 };
 
 export type UserForm = {
