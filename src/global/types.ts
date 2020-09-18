@@ -26,3 +26,19 @@ export type UserForm = {
   ngoAdmin?: boolean;
   userType?: string;
 };
+
+export type AuthReducerAction =
+  | { type: "LOGIN"; payload: string }
+  | { type: "LOGOUT" };
+
+export type AuthState = {
+  user: User | string;
+};
+
+export type DispatchContext = ({
+  type,
+  payload,
+}: {
+  type: any;
+  payload?: string;
+}) => void;
