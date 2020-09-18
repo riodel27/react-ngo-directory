@@ -1,17 +1,21 @@
 import React, { createContext, useReducer, useContext } from "react";
 import jwtDecode from "jwt-decode";
+import {
+  User,
+  AuthReducerAction,
+  AuthState,
+  DispatchContext,
+} from "@/global/types";
 
-import { User } from "@/global/types";
+const noop = () => {};
 
-type Dispatch = ({ type, payload }: { type: any; payload?: string }) => void;
-
-const AuthStateContext = createContext<{ user: User | string }>({ user: {} });
-const AuthDispatchContext = createContext<Dispatch>(() => {});
+const AuthStateContext = createContext<AuthState>({ user: {} });
+const AuthDispatchContext = createContext<DispatchContext>(noop);
 
 let user: User = null as any;
 
-// reload or refresh
 const token = localStorage.getItem("token");
+
 if (token) {
   const decodedToken: User = jwtDecode(token);
 
@@ -24,13 +28,7 @@ if (token) {
   }
 } else console.log("No token found");
 
-type Action = { type: "LOGIN"; payload: string } | { type: "LOGOUT" };
-
-type State = {
-  user: User | string;
-};
-
-const authReducer = (state: State, action: Action) => {
+const authReducer = (state: AuthState, action: AuthReducerAction) => {
   switch (action.type) {
     case "LOGIN":
       localStorage.setItem("token", action.payload);

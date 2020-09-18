@@ -1,6 +1,8 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Link, Button } from "@material-ui/core";
 
+import { Link as RouterLink } from "react-router-dom";
+
 import Logo from "_assets/images/Logo.svg";
 import { useStyles } from "./styled";
 
@@ -25,22 +27,27 @@ export const Header: React.FC = ({}) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          <img src={Logo} alt="Globe Drop" />
+          <RouterLink to="/">
+            <img src={Logo} alt="Globe Drop" />
+          </RouterLink>
         </Typography>
         <nav>
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
             className={classes.link}
+            component={RouterLink}
+            to="/users"
           >
             User List
           </Link>
+
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
             className={classes.link}
+            component={RouterLink}
+            to="/organizations"
           >
             NGO List
           </Link>
