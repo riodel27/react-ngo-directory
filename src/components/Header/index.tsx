@@ -6,12 +6,19 @@ import { Link as RouterLink } from "react-router-dom";
 import Logo from "_assets/images/Logo.svg";
 import { useStyles } from "./styled";
 
-import { useAuthState } from "context/auth";
+import { useAuthState, useAuthDispatch } from "context/auth";
 
 export const Header: React.FC = ({}) => {
   const classes = useStyles();
 
   const { user } = useAuthState();
+  const dispatch = useAuthDispatch();
+
+  const handleLoginOrLogout = () => {
+    if (user) dispatch({ type: "LOGOUT" });
+
+    window.location.href = "/sign-in";
+  };
 
   return (
     <AppBar
@@ -57,6 +64,7 @@ export const Header: React.FC = ({}) => {
           color="primary"
           variant="outlined"
           className={classes.link}
+          onClick={handleLoginOrLogout}
         >
           {user ? "Logout" : "Login"}
         </Button>
