@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import {
   CssBaseline,
   Container,
@@ -20,7 +19,7 @@ import { useFormFields } from "_libs/hooksLib";
 import AuthService from "_services/auth.service";
 import { useAuthDispatch } from "context/auth";
 
-export const Login: React.FC<any> = ({ history }) => {
+export const Login: React.FC = () => {
   const classes = useStyles();
 
   const [fields, handleFieldChange] = useFormFields({
@@ -40,9 +39,9 @@ export const Login: React.FC<any> = ({ history }) => {
           fields.email,
           fields.password
         );
-        //TODO: maybe improve to decode token and pass as payload
+
         dispatch({ type: "LOGIN", payload: response.data.access_token });
-        history.push("/");
+        window.location.href = "/";
       } catch (e) {
         console.log("error auth sign: ", e);
         // onError(e);
@@ -116,4 +115,4 @@ export const Login: React.FC<any> = ({ history }) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

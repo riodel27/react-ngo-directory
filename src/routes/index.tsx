@@ -3,12 +3,12 @@ import { Switch } from "react-router-dom";
 
 import Route from "./Route";
 
-import Dashboard from "views/Dashboard";
-import Ngo from "views/Ngo";
-import PageNotFound from "views/PageNotFound";
-import SignIn from "views/Login";
-import SignUp from "views/SignUp";
-import User from "views/User";
+import Dashboard from "pages/Dashboard";
+import Ngo from "pages/Ngo";
+import PageNotFound from "pages/PageNotFound";
+import SignIn from "pages/Login";
+import SignUp from "pages/SignUp";
+import User from "pages/User";
 
 function Routes() {
   return (
