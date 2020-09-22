@@ -13,7 +13,7 @@ const RouteWrapper: React.FC<any> = ({
 }) => {
   const { user } = useAuthState();
 
-  // const user = false; // bypass
+  // const user = true; // bypass
 
   if (isPrivate && !user) {
     return <Redirect to="/sign-in" />;

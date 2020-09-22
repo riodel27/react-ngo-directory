@@ -4,4 +4,8 @@ const getOrganizations = () => {
   return axiosInstance.get("/organizations");
 };
 
-export default { getOrganizations };
+const createOrganization = () => {
+  return axiosInstance.post("/organizations");
+};
+
+export default { getOrganizations, createOrganization };
