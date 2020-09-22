@@ -10,6 +10,7 @@ import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import { useStyles } from "./styled";
 
 import Grid from "components/Organization/Grid";
+import Modal from "components/Organization/Modal";
 import OrganizationService from "_services/organization.service";
 
 interface NgoProps {}
@@ -18,6 +19,10 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
   const classes = useStyles();
 
   const [organizations, setOrganizations] = useState([]);
+
+  const [activeOrganization, setActiveOrganization] = useState(null);
+  const [action, setAction] = useState(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -36,7 +41,12 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
           <Container maxWidth="sm">
             <Typography variant="h3" align="center" color="textPrimary">
               <span>NGO Directory</span>
-              <IconButton aria-label="add">
+              <IconButton
+                aria-label="add"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
                 <AddCircleOutlinedIcon />
               </IconButton>
             </Typography>
@@ -56,6 +66,14 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
           <Grid organizations={organizations} />
         </Container>
       </main>
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        // action={action}
+        // activeOrganization={activeOrganization}
+        // setActiveOrganization={setActiveOrganization}
+        // handleSubmit={handleSubmit}
+      />
     </>
   );
 };
