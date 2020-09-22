@@ -46,7 +46,7 @@ export const Header: React.FC = ({}) => {
             component={RouterLink}
             to="/users"
           >
-            User List
+            Users
           </Link>
 
           <Link
@@ -56,7 +56,7 @@ export const Header: React.FC = ({}) => {
             component={RouterLink}
             to="/organizations"
           >
-            NGO List
+            Organizations
           </Link>
         </nav>
         <Button
