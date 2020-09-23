@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   CssBaseline,
@@ -8,30 +8,23 @@ import {
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 
 import { useStyles } from "./styled";
-
 import Grid from "components/Organization/Grid";
 import Modal from "components/Organization/Modal";
-import OrganizationService from "_services/organization.service";
+
+import usePosts from "hooks/organization/useOrganizations";
 
 interface NgoProps {}
 
 export const Ngo: React.FC<NgoProps> = ({}) => {
   const classes = useStyles();
 
-  const [organizations, setOrganizations] = useState([]);
+  const { isLoading, data, isError } = usePosts();
 
-  const [activeOrganization, setActiveOrganization] = useState(null);
-  const [action, setAction] = useState(null);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const organizations = await OrganizationService.getOrganizations();
-      setOrganizations(organizations.data.data);
+  if (isLoading) return <>loading...</>;
 
-      // managed organizations by user id
-    })();
-  }, []);
+  if (isError) return <>"An error has occurred..."</>;
 
   return (
     <>
@@ -63,7 +56,7 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
             Other Organizations
           </Typography>
           <br></br>
-          <Grid organizations={organizations} />
+          <Grid organizations={data} />
         </Container>
       </main>
       <Modal
