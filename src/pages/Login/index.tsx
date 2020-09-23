@@ -35,7 +35,7 @@ export const Login: React.FC = () => {
     if (event.currentTarget.checkValidity() === false) event.stopPropagation();
     else {
       try {
-        const response = await AuthService.signIn(
+        const response = await AuthService.SignIn(
           fields.email,
           fields.password
         );
