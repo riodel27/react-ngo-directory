@@ -11,14 +11,14 @@ import { useStyles } from "./styled";
 import Grid from "components/Organization/Grid";
 import Modal from "components/Organization/Modal";
 
-import usePosts from "hooks/organization/useOrganizations";
+import useOrganizations from "hooks/organization/useOrganizations";
 
 interface NgoProps {}
 
 export const Ngo: React.FC<NgoProps> = ({}) => {
   const classes = useStyles();
 
-  const { isLoading, data, isError } = usePosts();
+  const { isLoading, data, isError } = useOrganizations();
 
   const [open, setOpen] = useState(false);
 
