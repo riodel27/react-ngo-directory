@@ -14,9 +14,8 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { useStyles } from "./styled";
-
 import { useFormFields } from "_libs/hooksLib";
-import AuthService from "_services/auth.service";
+import useSignUpMutation from "hooks/auth/mutation/useSignUpMutation";
 
 export const SignUp: React.FC = () => {
   const classes = useStyles();
@@ -31,15 +30,16 @@ export const SignUp: React.FC = () => {
     ngoAdmin: false,
   });
 
+  const [signUp, { status, error }] = useSignUpMutation();
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // setIsLoading(true);
+
     if (event.currentTarget.checkValidity() === false) event.stopPropagation();
     else {
       try {
-        await AuthService.SignUp(fields);
-        // userHasAuthenticated(true);
-        // history.push("/");
+        signUp(fields);
+        window.location.href = "/";
       } catch (e) {
         // onError(e);
         // setIsLoading(false);

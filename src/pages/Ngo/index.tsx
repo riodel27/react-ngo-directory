@@ -11,7 +11,7 @@ import { useStyles } from "./styled";
 import Grid from "components/Organization/Grid";
 import Modal from "components/Organization/Modal";
 
-import useOrganizations from "hooks/organization/useOrganizations";
+import useOrganizations from "hooks/organization/query/useOrganizations";
 
 interface NgoProps {}
 

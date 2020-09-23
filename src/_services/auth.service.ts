@@ -2,15 +2,16 @@ import { axiosInstance } from "./base";
 
 import { User } from "@/global/types";
 
-const signIn = (email: string, password: string) => {
+const SignIn = (email: string, password: string): Promise<any> => {
   return axiosInstance.post("/user/login", { email, password });
 };
 
-const SignUp = (data: User) => {
-  return axiosInstance.post("/user", data);
+const SignUp = async (data: User) => {
+  await axiosInstance.post("/user", data);
+  return;
 };
 
 export default {
-  signIn,
+  SignIn,
   SignUp,
 };
