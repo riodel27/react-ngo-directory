@@ -1,3 +1,7 @@
 import { axiosInstance } from "./base";
 
-export default {};
+const getUsers = () => {
+  return axiosInstance.get("/users");
+};
+
+export default { getUsers };
