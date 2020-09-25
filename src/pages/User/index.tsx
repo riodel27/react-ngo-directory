@@ -15,6 +15,8 @@ import { StyledTableCell, StyledTableRow, useStyles } from "./styled";
 import { User as UserType } from "@/global/types";
 import useUsersQuery from "hooks/user/query/useUsersQuery";
 
+import LinearProgress from "@material-ui/core/LinearProgress";
+
 interface UserProps {}
 
 // TODO: paginate or lazy load users table
@@ -24,7 +26,12 @@ export const User: React.FC<UserProps> = ({}) => {
 
   const { isLoading, data: users, isError } = useUsersQuery();
 
-  if (isLoading) return <>loading...</>;
+  if (isLoading)
+    return (
+      <>
+        <LinearProgress />
+      </>
+    );
 
   if (isError) return <>"An error has occurred..."</>;
 

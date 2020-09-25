@@ -3,8 +3,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { QueryCache, ReactQueryCacheProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
 
+import { FullPageSpinner } from "components/lib";
 import Header from "components/Header";
-import Routes from "routes";
+
+const Routes = React.lazy(() => import("routes"));
 
 const queryCache = new QueryCache();
 
@@ -16,7 +18,9 @@ function App() {
     <ReactQueryCacheProvider queryCache={queryCache}>
       <Router>
         <Header />
-        <Routes />
+        <React.Suspense fallback={<FullPageSpinner />}>
+          <Routes />
+        </React.Suspense>
       </Router>
       <ReactQueryDevtools initialIsOpen />
     </ReactQueryCacheProvider>

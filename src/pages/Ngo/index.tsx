@@ -4,6 +4,7 @@ import {
   CssBaseline,
   IconButton,
   Typography,
+  LinearProgress,
 } from "@material-ui/core";
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 
@@ -22,7 +23,12 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
 
   const [open, setOpen] = useState(false);
 
-  if (isLoading) return <>loading...</>;
+  if (isLoading)
+    return (
+      <>
+        <LinearProgress />
+      </>
+    );
 
   if (isError) return <>"An error has occurred..."</>;
 
