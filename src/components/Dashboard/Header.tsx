@@ -15,7 +15,6 @@ import { useAuthState, useAuthDispatch } from "context/auth";
 
 interface HeaderProps {}
 
-//TODO: maybe this is not needed and re-use the Header Component. Just need to change the background.
 export const Header: React.FC<HeaderProps> = ({}) => {
   const classes = useStyles();
 
