@@ -1,15 +1,28 @@
 import React from "react";
-import { Container, CssBaseline, Typography } from "@material-ui/core";
+import {
+  Container,
+  CssBaseline,
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@material-ui/core";
 
-import { useStyles } from "./styled";
+import { StyledTableCell, StyledTableRow, useStyles } from "./styled";
 import useUsersQuery from "hooks/user/query/useUsersQuery";
+import { User as UserType } from "@/global/types";
 
 interface UserProps {}
+
+// TODO: paginate or lazy load users table
 
 export const User: React.FC<UserProps> = ({}) => {
   const classes = useStyles();
 
-  const { isLoading, data, isError } = useUsersQuery();
+  const { isLoading, data: users, isError } = useUsersQuery();
 
   if (isLoading) return <>loading...</>;
 
@@ -22,14 +35,45 @@ export const User: React.FC<UserProps> = ({}) => {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography variant="h3" align="center" color="textPrimary">
-              <span> Users</span>
-              <ul>
-                {data &&
-                  data.map((user: any) => <li key={user._id}>{user.email}</li>)}
-              </ul>
+              <span>Users</span>
             </Typography>
           </Container>
         </div>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Username</StyledTableCell>
+                <StyledTableCell align="left">Name</StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Language</StyledTableCell>
+                <StyledTableCell align="left">Country</StyledTableCell>
+                <StyledTableCell align="left">role</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.length &&
+                users.map((user: UserType) => (
+                  <StyledTableRow key={user._id}>
+                    <StyledTableCell component="th" scope="row">
+                      {user.username}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{user.name}</StyledTableCell>
+                    <StyledTableCell align="left">{user.email}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {user.language}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {user.country}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {user.userType}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </main>
     </>
   );

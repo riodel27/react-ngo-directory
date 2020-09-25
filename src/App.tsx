@@ -8,6 +8,9 @@ import Routes from "routes";
 
 const queryCache = new QueryCache();
 
+//TODO: implement loading and error handling
+//TODO: implement react-query backround prefetch status...
+
 function App() {
   return (
     <ReactQueryCacheProvider queryCache={queryCache}>

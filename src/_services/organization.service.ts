@@ -1,7 +1,11 @@
 import { axiosInstance } from "./base";
 
+import { getAuthSession } from "_libs/auth.helper";
+
 const getOrganizations = () => {
-  return axiosInstance.get("/organizations");
+  const headers = { Authorization: `Bearer ${getAuthSession()}` };
+
+  return axiosInstance.get("/organizations", { headers });
 };
 
 const createOrganization = () => {
