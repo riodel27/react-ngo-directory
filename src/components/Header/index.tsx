@@ -39,6 +39,17 @@ export const Header: React.FC = ({}) => {
           </RouterLink>
         </Typography>
         <nav>
+          {user && user.userType === "super_admin" && (
+            <Link
+              variant="button"
+              color="textPrimary"
+              className={classes.link}
+              component={RouterLink}
+              to="/"
+            >
+              Dashboard
+            </Link>
+          )}
           <Link
             variant="button"
             color="textPrimary"
@@ -61,7 +72,7 @@ export const Header: React.FC = ({}) => {
         </nav>
         {user && (
           <span>
-            Welcome, <strong>{user.name}</strong>
+            Welcome, <strong>{user.username} </strong>
           </span>
         )}
         <Button
