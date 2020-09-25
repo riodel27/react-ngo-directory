@@ -13,7 +13,6 @@ import User from "pages/User";
 function Routes() {
   return (
     <Switch>
-      {/* TODO: Dashboard is only for super admin */}
       <Route exact path="/" component={Dashboard} isPrivate />
       <Route exact path="/sign-in" component={SignIn} guest />
       <Route exact path="/sign-up" component={SignUp} guest />

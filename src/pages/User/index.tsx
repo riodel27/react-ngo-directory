@@ -12,8 +12,8 @@ import {
 } from "@material-ui/core";
 
 import { StyledTableCell, StyledTableRow, useStyles } from "./styled";
-import useUsersQuery from "hooks/user/query/useUsersQuery";
 import { User as UserType } from "@/global/types";
+import useUsersQuery from "hooks/user/query/useUsersQuery";
 
 interface UserProps {}
 
@@ -52,7 +52,7 @@ export const User: React.FC<UserProps> = ({}) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.length &&
+              {users &&
                 users.map((user: UserType) => (
                   <StyledTableRow key={user._id}>
                     <StyledTableCell component="th" scope="row">
