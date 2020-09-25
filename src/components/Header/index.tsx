@@ -56,9 +56,14 @@ export const Header: React.FC = ({}) => {
             component={RouterLink}
             to="/organizations"
           >
-            Organizations
+            NGO's
           </Link>
         </nav>
+        {user && (
+          <span>
+            Welcome, <strong>{user.name}</strong>
+          </span>
+        )}
         <Button
           href="#"
           color="primary"

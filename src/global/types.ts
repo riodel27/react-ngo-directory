@@ -32,7 +32,8 @@ export type AuthReducerAction =
   | { type: "LOGOUT" };
 
 export type AuthState = {
-  user: User | string;
+  // user: User | string;
+  user: User;
 };
 
 export type DispatchContext = ({
