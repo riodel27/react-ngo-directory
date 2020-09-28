@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Box,
+  Button,
   Container,
   CssBaseline,
   Paper,
@@ -10,30 +12,37 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { StyledTableCell, StyledTableRow, useStyles } from "./styled";
 import { User as UserType } from "@/global/types";
-import useUsersQuery from "hooks/user/query/useUsersQuery";
 
-import LinearProgress from "@material-ui/core/LinearProgress";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useUsersInfiniteQuery from "hooks/user/query/useUsersInfiniteQuery";
 
 interface UserProps {}
-
-// TODO: paginate or lazy load users table
 
 export const User: React.FC<UserProps> = ({}) => {
   const classes = useStyles();
 
-  const { isLoading, data: users, isError } = useUsersQuery();
+  const responseData: any = useUsersInfiniteQuery();
 
-  if (isLoading)
+  const loadMoreButtonRef: any = React.useRef();
+
+  useIntersectionObserver({
+    target: loadMoreButtonRef,
+    onIntersect: responseData.fetchMore,
+    enabled: responseData.canFetchMore,
+  });
+
+  if (responseData.isLoading)
     return (
       <>
         <LinearProgress />
       </>
     );
 
-  if (isError) return <>"An error has occurred..."</>;
+  if (responseData.error) return <>"An error has occurred..."</>;
 
   return (
     <>
@@ -59,29 +68,51 @@ export const User: React.FC<UserProps> = ({}) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users &&
-                users.map((user: UserType) => (
-                  <StyledTableRow key={user._id}>
-                    <StyledTableCell component="th" scope="row">
-                      {user.username}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{user.name}</StyledTableCell>
-                    <StyledTableCell align="left">{user.email}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {user.language}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {user.country}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {user.userType}
-                    </StyledTableCell>
-                  </StyledTableRow>
+              {responseData.data &&
+                responseData.data.map((page: any, i: any) => (
+                  <React.Fragment key={i}>
+                    {page.data &&
+                      page.data.map((user: UserType) => (
+                        <StyledTableRow key={user._id}>
+                          <StyledTableCell component="th" scope="row">
+                            {user.username}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {user.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {user.email}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {user.language}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {user.country}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {user.userType}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                  </React.Fragment>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
       </main>
+      <Box display="flex" flexDirection="row-reverse" p={1}>
+        <Button
+          ref={loadMoreButtonRef}
+          onClick={() => responseData.fetchMore()}
+          disabled={!responseData.canFetchMore || responseData.isFetchingMore}
+        >
+          {responseData.isFetchingMore
+            ? "Loading more..."
+            : responseData.canFetchMore
+            ? "Load More"
+            : "Nothing more to load"}
+        </Button>
+      </Box>
     </>
   );
 };
