@@ -9,9 +9,14 @@ const OrganizationGrid: React.FC<GridProps | any> = (props) => {
   const { organizations } = props;
   return (
     <Grid container spacing={4}>
-      {organizations.map((organization: any) => (
-        <Card key={organization._id} organization={organization} {...props} />
-      ))}
+      {organizations &&
+        organizations.map((organization: any) => (
+          <Card
+            key={organization.org_name}
+            organization={organization}
+            {...props}
+          />
+        ))}
     </Grid>
   );
 };
