@@ -55,7 +55,7 @@ export const User: React.FC<UserProps> = ({}) => {
             </Typography>
           </Container>
         </div>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className={classes.container}>
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -98,21 +98,23 @@ export const User: React.FC<UserProps> = ({}) => {
                 ))}
             </TableBody>
           </Table>
+          <Box display="flex" flexDirection="row-reverse" p={1}>
+            <Button
+              ref={loadMoreButtonRef}
+              onClick={() => responseData.fetchMore()}
+              disabled={
+                !responseData.canFetchMore || responseData.isFetchingMore
+              }
+            >
+              {responseData.isFetchingMore
+                ? "Loading more..."
+                : responseData.canFetchMore
+                ? "Load More"
+                : "Nothing more to load"}
+            </Button>
+          </Box>
         </TableContainer>
       </main>
-      <Box display="flex" flexDirection="row-reverse" p={1}>
-        <Button
-          ref={loadMoreButtonRef}
-          onClick={() => responseData.fetchMore()}
-          disabled={!responseData.canFetchMore || responseData.isFetchingMore}
-        >
-          {responseData.isFetchingMore
-            ? "Loading more..."
-            : responseData.canFetchMore
-            ? "Load More"
-            : "Nothing more to load"}
-        </Button>
-      </Box>
     </>
   );
 };
