@@ -36,9 +36,11 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
         {`${action} Organization Details`}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Please make the necessary edits to this specific organization.
-        </DialogContentText>
+        {action === "Edit" && (
+          <DialogContentText>
+            Please make the necessary edits to this specific organization.
+          </DialogContentText>
+        )}
         {action === "View" && (
           <img
             src="https://source.unsplash.com/random"
