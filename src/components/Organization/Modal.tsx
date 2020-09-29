@@ -12,17 +12,19 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import CloseIcon from "@material-ui/icons/Close";
+import { useFormFields } from "_libs/hooksLib";
 
 interface ModalProps {}
 
 export const OrganizationModal: React.FC<ModalProps | any> = ({
-  activeOrganization,
-  setActiveOrganization,
-  handleSubmit,
+  organization,
   action,
   open,
   setOpen,
   close,
+  handleSubmit,
+  activeOrganization,
+  handleFieldChange,
 }) => {
   return (
     <Dialog
@@ -48,12 +50,12 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="org_name"
             label="Name"
             type="text"
             fullWidth
             value={activeOrganization && activeOrganization.org_name}
-            // onChange={(e) => handleChange(e, "org_name")}
+            onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
             }}
@@ -61,12 +63,12 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="description"
+            id="org_description"
             label="Description"
             type="text"
             fullWidth
             value={activeOrganization && activeOrganization.org_description}
-            // onChange={(e) => handleChange(e, "org_description")}
+            onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
             }}
@@ -74,12 +76,12 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="city"
+            id="org_city"
             label="City"
             type="text"
             fullWidth
             value={activeOrganization && activeOrganization.org_city}
-            // onChange={(e) => handleChange(e, "org_city")}
+            onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
             }}
@@ -87,12 +89,12 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="country"
+            id="org_country"
             label="Country"
             type="text"
             fullWidth
             value={activeOrganization && activeOrganization.org_country}
-            // onChange={(e) => handleChange(e, "org_country")}
+            onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
             }}
@@ -100,12 +102,12 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
           <TextField
             autoFocus
             margin="dense"
-            id="picture"
+            id="org_picture"
             label="Photo Link"
             type="text"
             fullWidth
             value={activeOrganization && activeOrganization.org_picture}
-            // onChange={(e) => handleChange(e, "org_picture")}
+            onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
             }}

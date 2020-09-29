@@ -27,6 +27,14 @@ export type UserForm = {
   userType?: string;
 };
 
+export type OrganizationInput = {
+  org_name?: "";
+  org_description?: "";
+  org_city?: "";
+  org_country?: "";
+  org_picture?: "";
+};
+
 export type AuthReducerAction =
   | { type: "LOGIN"; payload: string }
   | { type: "LOGOUT" };
