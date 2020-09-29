@@ -18,13 +18,13 @@ export default function useCreateNgoMutation() {
         cache.cancelQueries("organizations");
 
         // Snapshot the previous value
-        const previousTodos = cache.getQueryData("organizations");
+        const previousOrganizations = cache.getQueryData("organizations");
 
         // Optimistically update to the new value
         cache.setQueryData("organizations", (old: any) => [...old, newNgo]);
 
         // Return the snapshotted value
-        return () => cache.setQueryData("organizations", previousTodos);
+        return () => cache.setQueryData("organizations", previousOrganizations);
       },
       // If the mutation fails, use the value returned from onMutate to roll back
       onError: (err, newNgo, rollback: any) => rollback(),
