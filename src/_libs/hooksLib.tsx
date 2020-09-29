@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { UserForm } from "@/global/types";
+import { OrganizationInput, UserForm } from "@/global/types";
 
 export function useFormFields(
   initialState: UserForm
@@ -21,6 +21,29 @@ export function useFormFields(
               userType: "user",
             }),
       });
+    },
+  ];
+}
+
+export function useFormNgoFields(
+  initialState: OrganizationInput | null
+): [
+  OrganizationInput | null,
+  (event: React.ChangeEvent<HTMLInputElement>) => void,
+  () => void
+] {
+  const [fields, setValues] = useState(initialState);
+
+  return [
+    fields,
+    function (event: React.ChangeEvent<HTMLInputElement>) {
+      setValues({
+        ...fields,
+        [event.target.id]: event.target.value,
+      });
+    },
+    function () {
+      setValues(initialState);
     },
   ];
 }

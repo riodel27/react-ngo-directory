@@ -27,7 +27,7 @@ const OrganizationCard: React.FC<CardProps | any> = ({
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={"https://source.unsplash.com/random"}
+            image={organization.org_picture || "https://picsum.photos/300"}
             title="Image title"
           />
           <CardContent className={classes.cardContent}>
