@@ -6,7 +6,11 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(8, 0, 6),
   },
   table: {
-    width: "100%", // temporary fix for TableContainer does not contain align prop...
+    width: "100%",
+  },
+  container: {
+    width: "80%",
+    margin: "auto",
   },
 }));
 
