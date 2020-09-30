@@ -21,6 +21,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-error-boundary": "^3.0.2",
     "react-icons": "^3.11.0",
     "react-query": "^2.23.0",
     "react-query-devtools": "^2.5.0",
