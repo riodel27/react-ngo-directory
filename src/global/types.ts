@@ -28,6 +28,7 @@ export type UserForm = {
 };
 
 export type OrganizationInput = {
+  id?: "";
   org_name?: "";
   org_description?: "";
   org_city?: "";
