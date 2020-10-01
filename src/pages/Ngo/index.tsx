@@ -7,6 +7,8 @@ import {
   LinearProgress,
 } from "@material-ui/core";
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
+import { not } from "ramda";
+import { isEmpty as _isEmpty } from "lodash";
 
 import { useStyles } from "./styled";
 import { _objectDiffer } from "_libs/helper";
@@ -16,6 +18,7 @@ import Modal from "components/Organization/Modal";
 import useOrganizations from "hooks/organization/query/useOrganizations";
 import useCreateNgoMutation from "hooks/organization/mutation/useCreateNgoMutation";
 import useUpdateNgoMutation from "hooks/organization/mutation/useUpdateNgoMutation";
+import useDeleteNgoMutation from "hooks/organization/mutation/useDeleteNgoMutation";
 
 interface NgoProps {}
 
@@ -36,18 +39,22 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
 
   const [createNgo, { status, error }] = useCreateNgoMutation();
   const [updateNgo] = useUpdateNgoMutation();
+  const [deleteNgo] = useDeleteNgoMutation();
 
-  const handleViewOrEdit = ({
+  const handleAction = ({
     event,
     active_ngo,
   }: {
     event: string;
     active_ngo: any; // TODO: create type for NGO in global types
   }) => {
-    setOpen(true);
-    setAction(event);
-    setValues(active_ngo);
-    setOrganizaton(active_ngo);
+    if (event === "Delete") deleteNgo(active_ngo._id);
+    else {
+      setOpen(true);
+      setAction(event);
+      setValues(active_ngo);
+      setOrganizaton(active_ngo);
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -57,14 +64,11 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
       case "Add":
         createNgo(ngo);
         break;
-      case "Delete":
-        // todo: delete ngo mutation
-        break;
       case "Edit":
         const updated_ngo = _objectDiffer(ngo, organization);
-        updateNgo({ ...updated_ngo, id: (organization as any)._id });
+        if (not(_isEmpty(updated_ngo)))
+          updateNgo({ ...updated_ngo, id: (organization as any)._id });
         break;
-
       default:
     }
 
@@ -112,10 +116,7 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
             Other Organizations
           </Typography>
           <br></br>
-          <Grid
-            organizations={organizations}
-            handleViewOrEdit={handleViewOrEdit}
-          />
+          <Grid organizations={organizations} handleAction={handleAction} />
         </Container>
       </main>
       <Modal
