@@ -12,7 +12,6 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import CloseIcon from "@material-ui/icons/Close";
-import { useFormFields } from "_libs/hooksLib";
 
 interface ModalProps {}
 
@@ -23,7 +22,6 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
   setOpen,
   close,
   handleSubmit,
-  activeOrganization,
   handleFieldChange,
 }) => {
   return (
@@ -33,7 +31,9 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
       open={open}
     >
       <DialogTitle id="customized-dialog-title" onClose={close}>
-        {`${action} Organization Details`}
+        {action === "View"
+          ? "Organization Details"
+          : `${action} Organization Details`}
       </DialogTitle>
       <DialogContent>
         {action === "Edit" && (
@@ -43,8 +43,10 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
         )}
         {action === "View" && (
           <img
-            src="https://source.unsplash.com/random"
-            alt="test title"
+            src={
+              organization.org_picture || "https://source.unsplash.com/random"
+            }
+            alt="org picture"
             style={{ maxWidth: "100%" }}
           />
         )}
@@ -56,7 +58,7 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
             label="Name"
             type="text"
             fullWidth
-            value={activeOrganization && activeOrganization.org_name}
+            value={organization ? organization.org_name : ""}
             onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
@@ -69,7 +71,7 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
             label="Description"
             type="text"
             fullWidth
-            value={activeOrganization && activeOrganization.org_description}
+            value={organization ? organization.org_description : ""}
             onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
@@ -82,7 +84,7 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
             label="City"
             type="text"
             fullWidth
-            value={activeOrganization && activeOrganization.org_city}
+            value={organization ? organization.org_city : ""}
             onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
@@ -95,7 +97,7 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
             label="Country"
             type="text"
             fullWidth
-            value={activeOrganization && activeOrganization.org_country}
+            value={organization ? organization.org_country : ""}
             onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",
@@ -108,7 +110,7 @@ export const OrganizationModal: React.FC<ModalProps | any> = ({
             label="Photo Link"
             type="text"
             fullWidth
-            value={activeOrganization && activeOrganization.org_picture}
+            value={organization ? organization.org_picture : ""}
             onChange={handleFieldChange}
             InputProps={{
               disabled: action === "View",

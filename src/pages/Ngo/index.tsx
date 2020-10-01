@@ -9,11 +9,13 @@ import {
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 
 import { useStyles } from "./styled";
+import { _objectDiffer } from "_libs/helper";
+import { useFormNgoFields } from "_libs/hooksLib";
 import Grid from "components/Organization/Grid";
 import Modal from "components/Organization/Modal";
 import useOrganizations from "hooks/organization/query/useOrganizations";
-import { useFormNgoFields } from "_libs/hooksLib";
 import useCreateNgoMutation from "hooks/organization/mutation/useCreateNgoMutation";
+import useUpdateNgoMutation from "hooks/organization/mutation/useUpdateNgoMutation";
 
 interface NgoProps {}
 
@@ -22,41 +24,62 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
 
   const [open, setOpen] = useState(false);
   const [action, setAction] = useState("");
-  const [organization, setOrganization] = useState({});
-  const [fields, handleFieldChange, resetFields] = useFormNgoFields(null);
+  const [organization, setOrganizaton] = useState(null);
+  const [ngo, setValues, handleFieldChange, resetNgoFields] = useFormNgoFields(
+    null
+  );
+  const {
+    isLoading: is_loading,
+    data: organizations,
+    isError: is_error,
+  } = useOrganizations();
 
-  const { isLoading, data: organizations, isError } = useOrganizations();
   const [createNgo, { status, error }] = useCreateNgoMutation();
+  const [updateNgo] = useUpdateNgoMutation();
+
+  const handleViewOrEdit = ({
+    event,
+    active_ngo,
+  }: {
+    event: string;
+    active_ngo: any; // TODO: create type for NGO in global types
+  }) => {
+    setOpen(true);
+    setAction(event);
+    setValues(active_ngo);
+    setOrganizaton(active_ngo);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     switch (action) {
       case "Add":
-        createNgo(fields);
+        createNgo(ngo);
         break;
       case "Delete":
-        console.log("Delete organization");
+        // todo: delete ngo mutation
         break;
       case "Edit":
-        console.log("Edit organization");
+        const updated_ngo = _objectDiffer(ngo, organization);
+        updateNgo({ ...updated_ngo, id: (organization as any)._id });
         break;
 
       default:
     }
 
     setOpen(false);
-    resetFields();
+    resetNgoFields();
   };
 
-  if (isLoading)
+  if (is_loading)
     return (
       <>
         <LinearProgress />
       </>
     );
 
-  if (isError) return <>"An error has occurred..."</>;
+  if (is_error) return <>"An error has occurred..."</>;
 
   return (
     <>
@@ -89,16 +112,17 @@ export const Ngo: React.FC<NgoProps> = ({}) => {
             Other Organizations
           </Typography>
           <br></br>
-          <Grid organizations={organizations} />
+          <Grid
+            organizations={organizations}
+            handleViewOrEdit={handleViewOrEdit}
+          />
         </Container>
       </main>
       <Modal
         open={open}
         setOpen={setOpen}
         action={action}
-        organization={organization}
-        // activeOrganization={activeOrganization}
-        // setActiveOrganization={setActiveOrganization}
+        organization={ngo}
         handleSubmit={handleSubmit}
         handleFieldChange={handleFieldChange}
       />

@@ -29,6 +29,7 @@ export function useFormNgoFields(
   initialState: OrganizationInput | null
 ): [
   OrganizationInput | null,
+  React.Dispatch<React.SetStateAction<OrganizationInput | null>>,
   (event: React.ChangeEvent<HTMLInputElement>) => void,
   () => void
 ] {
@@ -36,6 +37,7 @@ export function useFormNgoFields(
 
   return [
     fields,
+    setValues,
     function (event: React.ChangeEvent<HTMLInputElement>) {
       setValues({
         ...fields,
