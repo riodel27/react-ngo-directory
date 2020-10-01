@@ -15,7 +15,7 @@ interface CardProps {}
 
 const OrganizationCard: React.FC<CardProps | any> = ({
   organization,
-  handleViewOrEdit,
+  handleAction,
 }) => {
   const classes = useStyles();
 
@@ -39,7 +39,7 @@ const OrganizationCard: React.FC<CardProps | any> = ({
               size="small"
               color="primary"
               onClick={() =>
-                handleViewOrEdit({ event: "View", active_ngo: organization })
+                handleAction({ event: "View", active_ngo: organization })
               }
             >
               View
@@ -48,10 +48,19 @@ const OrganizationCard: React.FC<CardProps | any> = ({
               size="small"
               color="primary"
               onClick={() =>
-                handleViewOrEdit({ event: "Edit", active_ngo: organization })
+                handleAction({ event: "Edit", active_ngo: organization })
               }
             >
               Edit
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() =>
+                handleAction({ event: "Delete", active_ngo: organization })
+              }
+            >
+              Delete
             </Button>
           </CardActions>
         </Card>
