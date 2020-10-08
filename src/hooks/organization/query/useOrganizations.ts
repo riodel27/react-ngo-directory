@@ -1,12 +1,11 @@
-import { useQuery } from "react-query";
-
-import OrganizationService from "_services/organization.service";
+import OrganizationService from '_services/organization.service';
+import { useQuery } from 'react-query';
 
 const getOrganizations = async () => {
-  const response = await OrganizationService.getOrganizations();
-  return response.data.data;
+   const response = await OrganizationService.getOrganizations();
+   return response.data.data;
 };
 
 export default function useOrganizations() {
-  return useQuery("organizations", getOrganizations);
+   return useQuery('organizations', getOrganizations);
 }

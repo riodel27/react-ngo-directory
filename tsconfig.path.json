@@ -1,7 +1,7 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@/global/*": ["global/*"]
-    }
-  }
+   "compilerOptions": {
+      "paths": {
+         "@/global/*": ["global/*"]
+      }
+   }
 }

@@ -1,9 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NGO Directory
 
 ### Naming Conventions
 
-- variable (snake_case)
-- function (camelCase)
+-  variable (snake_case)
+-  function (camelCase)
+
+### Pre-commit hook using husky
+
+`Husky and Git Hooks to make sure your code is clean, formatted and no-eslint error`
+
+ex:
+<br/>
+
+![Alt text](./uploads/readme/pre-commit-hook-1.png?raw=true 'pre-commit-hook-1')
+<br/>
+<br/>
+<br/>
+![Alt text](./uploads/readme/pre-commit-hook-2.png?raw=true 'pre-commit-hook-1')
+<br/>
+<br/>
+<br/>
+![Alt text](./uploads/readme/pre-commit-hook-3.png?raw=true 'pre-commit-hook-3')
+
+<br/>
+
+<br/>
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
