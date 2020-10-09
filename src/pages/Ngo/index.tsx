@@ -3,6 +3,7 @@ import { isEmpty as _isEmpty } from 'lodash';
 import { not } from 'ramda';
 import { Container, CssBaseline, IconButton, LinearProgress, Typography } from '@material-ui/core';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
+import { useAuthState } from 'context/auth';
 
 import { useStyles } from './styled';
 
@@ -18,13 +19,15 @@ import useOrganizations from 'hooks/organization/query/useOrganizations';
 export const Ngo = () => {
    const classes = useStyles();
 
+   const { user } = useAuthState();
+
    const [open, setOpen] = useState(false);
    const [action, setAction] = useState('');
    const [organization, setOrganizaton] = useState(null);
    const [ngo, setValues, handleFieldChange, resetNgoFields] = useFormNgoFields(null);
    const { isLoading: is_loading, data: organizations, isError: is_error } = useOrganizations();
 
-   const [createNgo, { status, error }] = useCreateNgoMutation();
+   const [createNgo] = useCreateNgoMutation();
    const [updateNgo] = useUpdateNgoMutation();
    const [deleteNgo] = useDeleteNgoMutation();
 
@@ -51,7 +54,7 @@ export const Ngo = () => {
 
       switch (action) {
          case 'Add': {
-            createNgo(ngo);
+            createNgo({ ...ngo, admins: [user?._id] });
             break;
          }
          case 'Edit': {

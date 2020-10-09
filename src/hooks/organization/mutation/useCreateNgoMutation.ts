@@ -1,18 +1,29 @@
 import { axiosInstance } from '_services/base';
 import { useMutation, useQueryCache } from 'react-query';
 
+import { useAuthState } from 'context/auth';
 import { OrganizationInput } from '@/global/types';
+import useUpdateUserMutation from 'hooks/user/mutation/useUpdateUserMutation';
 
 export default function useCreateNgoMutation() {
    const cache = useQueryCache();
+   const { user } = useAuthState();
+
+   const [updateUser] = useUpdateUserMutation();
 
    return useMutation(
       async (data: OrganizationInput | null) => {
-         await axiosInstance.post('/organization', data);
-         return;
+         const response = await axiosInstance.post('/organization', data);
+         return response.data;
       },
       {
-         // onSuccess: () => {},
+         onSuccess: (ngo, variables) => {
+            // link newly created ngo to user
+            updateUser({
+               id: user._id,
+               data: { organizations: [...user.organizations, ngo.data._id] }
+            });
+         },
          onMutate: (newNgo) => {
             // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
             cache.cancelQueries('organizations');

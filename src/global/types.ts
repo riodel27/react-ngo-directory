@@ -34,6 +34,7 @@ export type OrganizationInput = {
    org_city?: '';
    org_country?: '';
    org_picture?: '';
+   admins?: [string?];
 };
 
 export type AuthReducerAction = { type: 'LOGIN'; payload: string } | { type: 'LOGOUT' };
