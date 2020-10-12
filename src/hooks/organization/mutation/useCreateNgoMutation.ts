@@ -17,11 +17,11 @@ export default function useCreateNgoMutation() {
          return response.data;
       },
       {
-         onSuccess: (ngo, variables) => {
+         onSuccess: (ngo, _) => {
             // link newly created ngo to user
             updateUser({
                id: user._id,
-               data: { organizations: [...user.organizations, ngo.data._id] }
+               data: { $push: { organizations: ngo.data._id } }
             });
          },
          onMutate: (newNgo) => {
