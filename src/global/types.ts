@@ -1,3 +1,23 @@
+export type Organization = {
+   _id?: string;
+   org_name?: '';
+   org_description?: '';
+   org_city?: '';
+   org_country?: '';
+   org_picture?: '';
+   admins?: [string?];
+};
+
+export interface InitialOrganization {
+   _id?: string;
+   org_name?: '';
+   org_description?: '';
+   org_city?: '';
+   org_country?: '';
+   org_picture?: '';
+   admins?: [string?];
+}
+
 export type User = {
    _id?: string;
    email?: string;

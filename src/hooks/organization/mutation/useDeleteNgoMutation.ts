@@ -4,7 +4,7 @@ import { useMutation, useQueryCache } from 'react-query';
 export default function useDeleteNgoMutation() {
    const cache = useQueryCache();
    return useMutation(
-      async (id) => {
+      async (id: string) => {
          await axiosInstance.delete(`/organization/${id}`);
          return;
       },

@@ -19,6 +19,7 @@ export default function useUpdateNgoMutation() {
             // Snapshot the previous value
             const previous_organizations = cache.getQueryData('organizations');
 
+            //TODO: might need to refactor and is now based on managed-organizations query...
             // Optimistically update to the new list of organizations
             cache.setQueryData('organizations', (old_ngos: any) => {
                const elementsIndex = old_ngos.findIndex((ngo: any) => ngo._id === updated_ngo?.id);
